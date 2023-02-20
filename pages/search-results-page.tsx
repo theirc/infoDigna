@@ -13,6 +13,7 @@ import {
   getTranslationsFromDynamicContent,
 } from '@ircsignpost/signpost-base/dist/src/zendesk';
 import { GetStaticProps } from 'next';
+import getConfig from 'next/config';
 
 import {
   ABOUT_US_ARTICLE_ID,
@@ -67,6 +68,8 @@ export default function SearchResultsPage({
   siteUrl,
   footerLinks,
 }: SearchResultsPageProps) {
+  const { publicRuntimeConfig } = getConfig();
+
   return (
     <DefaultSearchResultsPage
       currentLocale={currentLocale}
@@ -82,6 +85,7 @@ export default function SearchResultsPage({
       servicesFilter={[1500000022641]}
       informationFilter={[1500000021941, 1500000022962]}
       footerLinks={footerLinks}
+      signpostVersion={publicRuntimeConfig?.version}
       cookieBanner={
         <CookieBanner
           strings={populateCookieBannerStrings(dynamicContent)}
