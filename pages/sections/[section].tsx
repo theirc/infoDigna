@@ -18,6 +18,7 @@ import {
   getTranslationsFromDynamicContent,
 } from '@ircsignpost/signpost-base/dist/src/zendesk';
 import { GetStaticProps } from 'next';
+import getConfig from 'next/config';
 import { useEffect, useState } from 'react';
 
 import {
@@ -76,6 +77,8 @@ export default function Category({
   footerLinks,
 }: CategoryProps) {
   const [sectionDisplayed, setSectionDisplayed] = useState<Section>(section);
+
+  const { publicRuntimeConfig } = getConfig();
 
   const handleFilterSectionChange = async (val: string) => {
     const dynamicContent = await getTranslationsFromDynamicContent(
@@ -141,6 +144,7 @@ export default function Category({
       filterItems={filterItems}
       onSelectFilterChange={handleFilterSectionChange}
       footerLinks={footerLinks}
+      signpostVersion={publicRuntimeConfig?.version}
     />
   );
 }
