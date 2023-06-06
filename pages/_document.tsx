@@ -8,6 +8,13 @@ function Document() {
           name="google-site-verification"
           content="SJVg8oxD8lqgMjxIJAIRGlMTpLV29o6WFYPP0SKZWrg"
         />
+
+        <meta property="og:title" content="infoDigna" />
+        <meta property="og:description" content="infoDigna website" />
+        <meta
+          property="og:image"
+          content="https://infodigna.org/api/og-image"
+        />
         <script
           src="https://kit.fontawesome.com/027db3ea3f.js"
           crossOrigin="anonymous"
