@@ -18,6 +18,10 @@ const langs: Lang[] = [
     langShort: 'en-us',
     langLong: 'English',
   },
+  {
+    langShort: 'fr',
+    langLong: 'Français',
+  },
 ];
 
 /** The locale selection page.

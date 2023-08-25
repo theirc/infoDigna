@@ -9,12 +9,14 @@ export { Locale };
 export const LOCALES: { [key: string]: Locale } = {
   'en-us': { url: 'en-us', direction: 'ltr', name: 'English' },
   es: { url: 'es', direction: 'ltr', name: 'Español' },
+  fr: { url: 'fr', direction: 'ltr', name: 'Français' },
 };
 
 export const LOCALE_CODES_TO_CANONICAL_LOCALE_CODES: { [key: string]: string } =
   {
     es: 'es',
     'en-us': 'en-us',
+    fr: 'fr',
   };
 
 // Returns the effective locale given locale code.
