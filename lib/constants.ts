@@ -13,13 +13,13 @@ export const MAP_DEFAULT_COORDS: LatLngExpression = [25.5428, -103.3496];
 export const REVALIDATION_TIMEOUT_SECONDS: number = 1 * 60 * 60;
 
 // The "about us" article ID.
-//
 export const ABOUT_US_ARTICLE_ID: number = 6592468755101;
 
 // The information hierary of the website.
 // Set to true for the category -> section -> article hierarchy, similar to that of United for Ukraine.
 // Set to false for the "information" -> category -> article hierarchy, similar to that of Beporsed.
 //
+// TODO
 export const USE_CAT_SEC_ART_CONTENT_STRUCTURE = true;
 
 // A mapping from category ID to a Material icon for that category.
@@ -45,6 +45,10 @@ export const SECTION_ICON_NAMES: { [key: string]: string } = {
 // A list of category IDs that the site should not display.
 export const CATEGORIES_TO_HIDE: number[] = [1500000022641];
 
+export const MENU_CATEGORIES_TO_HIDE: number[] = [
+  5388415886487, 5451758139293, 5388415940887, 4421271418775, 4420351027479,
+];
+
 // A map from a locale code to Zendesk locale id used for dynamic content translations.
 // https://developer.zendesk.com/api-reference/ticketing/account-configuration/locales/
 // Keep in sync with locales configured in /next.config.js.
@@ -64,9 +68,10 @@ export const GOOGLE_ANALYTICS_IDS = [
 // Algolia search app ID, Search API key and search index name:
 // https://www.algolia.com/account/api-keys/
 export const ALGOLIA_SEARCH_APP_ID = 'BWATZIXLX6';
-export const ALGOLIA_SEARCH_API_KEY = '0d9093280e7b2bc2b6ca12ed4180fd0a';
+export const ALGOLIA_SEARCH_API_KEY = '5ce4c0f27492db0d6e42fa948101e69c';
 
-export const ALGOLIA_ARTICLE_INDEX_NAME = 'zendesk_signpost-mexico_articles';
+// See README for more info on how to create indexes.
+export const ALGOLIA_ARTICLE_INDEX_NAME = 'zendesk_signpost-mexico';
 export const ALGOLIA_QUERY_INDEX_NAME =
   'zendesk_signpost-mexico_articles_query_suggestions';
 
@@ -81,3 +86,7 @@ export const SEARCH_RESULTS_PAGE_INDEX: AlgoliaSearchIndex = {
   publicApiKey: ALGOLIA_SEARCH_API_KEY,
   indexName: ALGOLIA_ARTICLE_INDEX_NAME,
 };
+
+export const DIRECTUS_AUTH_TOKEN = process.env.DIRECTUS_TOKEN ?? '';
+export const DIRECTUS_COUNTRY_ID = 10;
+export const DIRECTUS_INSTANCE = 'https://directus-irc.azurewebsites.net/';
