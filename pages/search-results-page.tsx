@@ -136,14 +136,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   const menuOverlayItems = getMenuItems(
     populateMenuOverlayStrings(dynamicContent),
-    categories,
-    !!aboutUsArticle
+    categories
   );
 
   const footerLinks = getFooterItems(
     populateMenuOverlayStrings(dynamicContent),
-    categories,
-    !!aboutUsArticle
+    categories
   );
 
   const strings = populateSearchResultsPageStrings(dynamicContent);

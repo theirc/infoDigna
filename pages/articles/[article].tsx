@@ -228,14 +228,12 @@ export const getStaticProps: GetStaticProps = async ({
   );
   const menuOverlayItems = getMenuItems(
     populateMenuOverlayStrings(dynamicContent),
-    categories,
-    !!aboutUsArticle
+    categories
   );
 
   const footerLinks = getFooterItems(
     populateMenuOverlayStrings(dynamicContent),
-    categories,
-    !!aboutUsArticle
+    categories
   );
 
   const strings = populateArticlePageStrings(dynamicContent);
