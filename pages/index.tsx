@@ -64,6 +64,8 @@ import {
 } from '../lib/translations';
 import { getZendeskMappedUrl, getZendeskUrl } from '../lib/url';
 
+// import { cachedDirectus } from '../lib/cacheddirectus'
+
 interface HomeProps {
   currentLocale: Locale;
   strings: HomePageStrings;
@@ -180,7 +182,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   const strings = populateHomePageStrings(dynamicContent);
 
-  const directus = new Directus(DIRECTUS_INSTANCE);
+  const directus: any = new Directus(DIRECTUS_INSTANCE);
   await directus.auth.static(DIRECTUS_AUTH_TOKEN);
 
   const services = await getDirectusArticles(
@@ -189,14 +191,51 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     currentLocale.directus
   );
 
+  // const services = await cachedDirectus.articlesLocale(currentLocale.directus)
+
   services?.sort((a, b) =>
     a.name.normalize().localeCompare(b.name.normalize())
   );
+
+  for (let n = 0; n < services.length; n++) {
+    const s = services[n];
+    const {
+      Files,
+      contactEmail,
+      Physical_Location,
+      date_created,
+      date_updated,
+      contactTitle,
+      secondaryEmail,
+      contactLastName,
+      country,
+      form,
+      headerimage,
+      oldid,
+      secondaryLastName,
+      secondaryName,
+      secondaryPhone,
+      user_updated,
+      user_created,
+      status,
+      source,
+      secondaryTitle,
+      contactPhone,
+      contactName,
+      ...minified
+    } = s;
+    services[n] = minified as any;
+  }
 
   const serviceTypes = await getDirectusServiceCategories(directus);
   const providers = await getDirectusProviders(directus, DIRECTUS_COUNTRY_ID);
   const populations = await getDirectusPopulationsServed(directus);
   const accessibility = await getDirectusAccessibility(directus);
+
+  // const serviceTypes = await cachedDirectus.serviceCategories()
+  // const providers = await cachedDirectus.providers()
+  // const populations = await cachedDirectus.populationsServed()
+  // const accessibility = await cachedDirectus.accessibilities()
 
   return {
     props: {

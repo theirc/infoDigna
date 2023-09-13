@@ -1,4 +1,4 @@
-import { Directus } from '@directus/sdk';
+import { Auth, Directus, TypeMap } from '@directus/sdk';
 import { extractMetaTags } from '@ircsignpost/signpost-base/dist/src/article-content';
 import { getErrorResponseProps } from '@ircsignpost/signpost-base/dist/src/article-page';
 import CookieBanner from '@ircsignpost/signpost-base/dist/src/cookie-banner';
@@ -149,15 +149,18 @@ export default function Service({
 }
 
 async function getStaticParams() {
-  const directus = new Directus(DIRECTUS_INSTANCE);
+  const directus: any = new Directus(DIRECTUS_INSTANCE);
   await directus.auth.static(DIRECTUS_AUTH_TOKEN);
   const services = await getDirectusArticles(DIRECTUS_COUNTRY_ID, directus);
+
+  // const services = await getServices(directus)
+
   const allowedLanguageCodes = Object.values(LOCALES).map(
     (locale) => locale.directus
   );
 
   const servicesFiltered = services?.filter((service) => {
-    const translation = service.translations.find((translation) =>
+    const translation = service?.translations?.find((translation) =>
       allowedLanguageCodes.includes(translation.languages_id.code)
     );
     return translation;
@@ -188,6 +191,7 @@ export async function getStaticPaths() {
       };
     }),
     fallback: 'blocking',
+    // fallback: false //Temporary patch to avoid some page errors! check later
   };
 }
 
@@ -200,7 +204,7 @@ export async function getStringPaths(): Promise<string[]> {
   return params.map((param) => getStringPath(param.service, param.locale));
 }
 
-export const getStaticProps: GetStaticProps = async ({
+export const getStaticProps: GetStaticProps = (async ({
   params,
   locale,
   preview,
@@ -248,7 +252,7 @@ export const getStaticProps: GetStaticProps = async ({
     categories
   );
 
-  const directus = new Directus(DIRECTUS_INSTANCE);
+  const directus: any = new Directus(DIRECTUS_INSTANCE);
   await directus.auth.static(DIRECTUS_AUTH_TOKEN);
 
   const service = await getDirectusArticle(Number(params?.service), directus);
@@ -318,4 +322,4 @@ export const getStaticProps: GetStaticProps = async ({
     },
     revalidate: REVALIDATION_TIMEOUT_SECONDS,
   };
-};
+}) as any;
