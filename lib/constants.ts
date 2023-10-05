@@ -71,7 +71,7 @@ export const ALGOLIA_SEARCH_APP_ID = 'BWATZIXLX6';
 export const ALGOLIA_SEARCH_API_KEY = '5ce4c0f27492db0d6e42fa948101e69c';
 
 // See README for more info on how to create indexes.
-export const ALGOLIA_ARTICLE_INDEX_NAME = 'zendesk_signpost-mexico';
+export const ALGOLIA_ARTICLE_INDEX_NAME = 'zendesk_signpost-mexico_articles';
 export const ALGOLIA_QUERY_INDEX_NAME =
   'zendesk_signpost-mexico_articles_query_suggestions';
 
