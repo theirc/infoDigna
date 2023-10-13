@@ -44,7 +44,6 @@ import {
   COMMON_DYNAMIC_CONTENT_PLACEHOLDERS,
   SECTION_PLACEHOLDERS,
   getLastUpdatedLabel,
-  populateFilterSelectStrings,
   populateMenuOverlayStrings,
   populateSectionStrings,
 } from '../../lib/translations';
@@ -59,8 +58,6 @@ interface CategoryProps {
   // A list of |MenuOverlayItem|s to be displayed in the header and side menu.
   menuOverlayItems: MenuOverlayItem[];
   strings: SectionStrings;
-  selectFilterLabel: string;
-  filterItems: MenuItem[];
   footerLinks?: MenuOverlayItem[];
 }
 
@@ -72,50 +69,11 @@ export default function Category({
   section,
   menuOverlayItems,
   strings,
-  selectFilterLabel,
-  filterItems,
   footerLinks,
 }: CategoryProps) {
   const [sectionDisplayed, setSectionDisplayed] = useState<Section>(section);
 
   const { publicRuntimeConfig } = getConfig();
-
-  const handleFilterSectionChange = async (val: string) => {
-    const dynamicContent = await getTranslationsFromDynamicContent(
-      getZendeskLocaleId(currentLocale),
-      COMMON_DYNAMIC_CONTENT_PLACEHOLDERS.concat(SECTION_PLACEHOLDERS),
-      getZendeskUrl(),
-      { Authorization: 'Bearer ' + process.env.NEXT_PUBLIC_ZENDESK_OAUTH_TOKEN }
-    );
-
-    const articles: Article[] = (
-      await getArticlesForSection(
-        currentLocale,
-        sectionId,
-        getZendeskUrl(),
-        val
-      )
-    ).map((article) => {
-      return {
-        id: article.id,
-        title: article.title,
-        lastEdit: {
-          label: getLastUpdatedLabel(dynamicContent),
-          value: article.updated_at,
-          locale: currentLocale,
-        },
-      };
-    });
-
-    const section: Section = {
-      id: sectionDisplayed.id,
-      name: sectionDisplayed.name,
-      description: sectionDisplayed.description,
-      articles,
-    };
-
-    setSectionDisplayed(section);
-  };
 
   useEffect(() => {
     setSectionDisplayed(section);
@@ -139,10 +97,6 @@ export default function Category({
         />
       }
       strings={strings}
-      selectFilterLabel={selectFilterLabel}
-      filterSelect={true}
-      filterItems={filterItems}
-      onSelectFilterChange={handleFilterSectionChange}
       footerLinks={footerLinks}
       signpostVersion={publicRuntimeConfig?.version}
     />
@@ -299,12 +253,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     categories
   );
 
-  const filterSelectStrings = populateFilterSelectStrings(dynamicContent);
-
-  const filterItems: MenuItem[] = [
-    { name: filterSelectStrings.mostRecent, value: 'updated_at' },
-  ];
-
   return {
     props: {
       currentLocale,
@@ -314,8 +262,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       section,
       menuOverlayItems,
       strings,
-      selectFilterLabel: filterSelectStrings.filterLabel,
-      filterItems,
       footerLinks,
     },
     revalidate: REVALIDATION_TIMEOUT_SECONDS,
