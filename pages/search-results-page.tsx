@@ -82,7 +82,7 @@ export default function SearchResultsPage({
       headerLogoProps={getHeaderLogoProps(currentLocale)}
       strings={strings}
       siteUrl={siteUrl}
-      servicesFilter={[1500000022641]}
+      servicesFilter={[1]}
       informationFilter={[1500000021941, 1500000022962]}
       footerLinks={footerLinks}
       signpostVersion={publicRuntimeConfig?.version}
