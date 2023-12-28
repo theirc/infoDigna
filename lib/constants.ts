@@ -38,8 +38,10 @@ export const SECTION_ICON_NAMES: { [key: string]: string } = {
   '1500000297721': 'language',
   '360011370234': 'flag',
   '1500000316222': 'coronavirus',
-  '1500000297701': 'flag_circle',
+  '1500000297701': 'euro',
   '1500000297681': 'flag_circle',
+  '15400470228765': 'follow_the_signs', // Asilo y migracion
+  '15400400520349': 'favorite', // Salud
 };
 
 // A list of category IDs that the site should not display.
