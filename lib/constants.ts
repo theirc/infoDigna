@@ -42,7 +42,8 @@ export const SECTION_ICON_NAMES: { [key: string]: string } = {
   '1500000297681': 'flag_circle',
   '15400470228765': 'follow_the_signs', // Asilo y migracion
   '15400400520349': 'favorite', // Salud
-  '15400444012061': 'info'
+  '15400444012061': 'info',
+  '15400475744413': 'book',
 };
 
 // A list of category IDs that the site should not display.
