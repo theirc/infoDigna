@@ -9,6 +9,7 @@ import ArticlePage, {
 import CookieBanner from '@ircsignpost/signpost-base/dist/src/cookie-banner';
 import Footer from '@ircsignpost/signpost-base/dist/src/footer';
 import { MenuOverlayItem } from '@ircsignpost/signpost-base/dist/src/menu-overlay';
+import { generateSummary } from '@ircsignpost/signpost-base/dist/src/openai';
 import { createDefaultSearchBarProps } from '@ircsignpost/signpost-base/dist/src/search-bar';
 import {
   CategoryWithSections,
@@ -73,6 +74,7 @@ interface ArticleProps {
   // A list of |MenuOverlayItem|s to be displayed in the header and side menu.
   menuOverlayItems: MenuOverlayItem[];
   footerLinks?: MenuOverlayItem[];
+  summary: string;
 }
 
 export default function Article({
@@ -89,6 +91,7 @@ export default function Article({
   strings,
   menuOverlayItems,
   footerLinks,
+  summary,
 }: ArticleProps) {
   const router = useRouter();
   const { publicRuntimeConfig } = getConfig();
@@ -147,6 +150,7 @@ export default function Article({
           },
           strings: strings.articleContentStrings,
           previosURL: breadcrumbs,
+          summary: summary,
         }}
       />
     </ArticlePage>
@@ -160,17 +164,13 @@ async function getStaticParams() {
     )
   );
 
-  return articles
-    .flat()
-    .filter((x) => x?.author_id !== 423757401494)
-    .map((article) => {
-      return {
-        article: article.id.toString(),
-        locale: article.locale,
-      };
-    });
+  return articles.flat().map((article) => {
+    return {
+      article: article.id.toString(),
+      locale: article.locale,
+    };
+  });
 }
-
 export async function getStaticPaths() {
   const articleParams = await getStaticParams();
 
@@ -252,6 +252,8 @@ export const getStaticProps: GetStaticProps = async ({
 
   const strings = populateArticlePageStrings(dynamicContent);
 
+  let summary = '';
+
   const article = await getArticle(
     currentLocale,
     Number(params?.article),
@@ -261,6 +263,11 @@ export const getStaticProps: GetStaticProps = async ({
     preview ?? false
   );
 
+  if (article) {
+    try {
+      summary = await generateSummary(article.body);
+    } catch (error) {}
+  }
   // If article does not exist, return an error.
   if (!article) {
     const errorProps = await getErrorResponseProps(
@@ -307,6 +314,7 @@ export const getStaticProps: GetStaticProps = async ({
       articleTitle: article.title,
       articleId: article.id,
       articleContent: content,
+      summary,
       metaTagAttributes,
       siteUrl: getSiteUrl(),
       lastEditedValue: article.edited_at,
