@@ -158,8 +158,6 @@ async function getStaticParams() {
   await directus.auth.static(DIRECTUS_AUTH_TOKEN);
   const services = await getDirectusArticles(DIRECTUS_COUNTRY_ID, directus);
 
-  // const services = await getServices(directus)
-
   const allowedLanguageCodes = Object.values(LOCALES).map(
     (locale) => locale.directus
   );
@@ -272,7 +270,8 @@ export const getStaticProps: GetStaticProps = (async ({
   if (
     !service ||
     !service.translations.length ||
-    service?.country !== DIRECTUS_COUNTRY_ID
+    service?.country !== DIRECTUS_COUNTRY_ID ||
+    service.status !== 'published'
   ) {
     const errorProps = await getErrorResponseProps(
       Number(params?.article),
