@@ -79,9 +79,11 @@ export const HOME_PAGE_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'default_banner_messenger_title',
   'default_banner_whatsapp_title',
   'default_banner_instagram_title',
+  'default_banner_email_title',
   'Signpost_Mexico_facebook_link',
   'Signpost_Mexico_whatsapp_link',
   'Signpost_Mexico_messenger_link',
+  'infodigna_email_link',
   // Main body strings.
   'default_information_title',
   'default_information_description',
@@ -144,6 +146,10 @@ export function populateSocialMediaLinks(dynamicContent: {
     messengerLink: {
       title: dynamicContent['default_banner_messenger_title'],
       href: dynamicContent['Signpost_Mexico_messenger_link'],
+    },
+    emailLink: {
+      title: dynamicContent['default_banner_email_title'],
+      href: dynamicContent['infodigna_email_link'],
     },
   };
 }
