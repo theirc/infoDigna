@@ -27,8 +27,8 @@ export function getFooterItems(
   for (const { category } of categories as CategoryWithSections[]) {
     if (category.id === 6592468755101) {
       items.push({
-        key: category.id.toString(),
-        label: category.name,
+        key: 'services',
+        label: strings.services,
         href: '/#service-map',
       });
     }
