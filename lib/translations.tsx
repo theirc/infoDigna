@@ -68,6 +68,7 @@ export const COMMON_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'default_friday_label',
   'default_saturday_label',
   'default_sunday_label',
+  'default_menu_services_title',
 ];
 
 export const HOME_PAGE_DYNAMIC_CONTENT_PLACEHOLDERS = [
@@ -285,6 +286,7 @@ export function populateMenuOverlayStrings(dynamicContent: {
     home: dynamicContent['default_menu_home_title'],
     information: dynamicContent['default_information_title'],
     about: dynamicContent['default_menu_about_title'],
+    services: dynamicContent['default_menu_services_title'],
   };
 }
 
