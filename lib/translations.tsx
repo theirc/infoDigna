@@ -43,6 +43,7 @@ export const COMMON_DYNAMIC_CONTENT_PLACEHOLDERS = [
   'default_most_recent_filter_option',
   'default_most_popular_filter_option',
   'default_home_disclaimer',
+  'default_home_footer',
   // Service Content strings.
   'default_opening_hours_label',
   'default_address_label',
@@ -393,7 +394,7 @@ export function populateFooterStrings(dynamicContent: {
   [key: string]: string;
 }): FooterStrings {
   return {
-    disclaimerSummary: dynamicContent['default_home_disclaimer'],
+    disclaimerSummary: dynamicContent['default_home_footer'],
   };
 }
 

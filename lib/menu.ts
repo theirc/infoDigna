@@ -25,15 +25,43 @@ export function getFooterItems(
 ): MenuOverlayItem[] {
   let items: MenuOverlayItem[] = [];
   items.push({ key: 'home', label: strings.home, href: '/' });
-  for (const { category } of categories as CategoryWithSections[]) {
-    if (category.id === 6592468755101) {
-      items.push({
-        key: 'services',
-        label: strings.services,
-        href: '/#service-map',
-      });
-    }
-  }
+  items.push({
+    key: 'dominican-republic',
+    label: 'Info Boca Bouch',
+    href: 'https://www.bocabouch.info/',
+  });
+  items.push({
+    key: 'ecuador',
+    label: 'InfoPalante Ecuador',
+    href: 'https://www.infopalanteec.org/',
+  });
+  items.push({
+    key: 'centroamerica',
+    label: 'Centroamérica: Cuéntanos ',
+    href: 'https://www.cuentanos.org/',
+  });
+  items.push({
+    key: 'US',
+    label: 'US: SettleIn',
+    href: 'https://www.settleinus.org',
+  });
+
+  items.push({
+    key: 'ee-uu',
+    label: 'EE.UU: ImportaMi',
+    href: 'https://www.importami.org/',
+  });
+  items.push({
+    key: 'Colombia',
+    label: 'InfoPalante Colombia',
+    href: 'https://www.infopalante.org/',
+  });
+  items.push({
+    key: 'ven-info',
+    label: 'Perú: Veninformado',
+    href: 'https://www.veninformado.pe/',
+  });
+
   return items;
 }
 
