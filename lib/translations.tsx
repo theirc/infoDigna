@@ -395,7 +395,6 @@ export function populateFooterStrings(dynamicContent: {
 }): FooterStrings {
   return {
     disclaimerSummary: dynamicContent['default_home_footer'],
-    disclaimer: dynamicContent['default_home_disclaimer'],
   };
 }
 
