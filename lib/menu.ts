@@ -25,8 +25,6 @@ export function getFooterItems(
 ): MenuOverlayItem[] {
   let items: MenuOverlayItem[] = [];
   items.push({ key: 'home', label: strings.home, href: '/' });
-  for (const { category } of categories as CategoryWithSections[]) {
-    if (category.id === 6592468755101) {
   items.push({
     key: 'dominican-republic',
     label: 'Info Boca Bouch',
