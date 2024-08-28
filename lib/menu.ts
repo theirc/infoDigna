@@ -24,11 +24,9 @@ export function getFooterItems(
   categories: ZendeskCategory[] | CategoryWithSections[]
 ): MenuOverlayItem[] {
   let items: MenuOverlayItem[] = [];
-  items.push({
-    key: 'services',
-    label: strings.services,
-    href: '/#service-map',
-  });
+  items.push({ key: 'home', label: strings.home, href: '/' });
+  for (const { category } of categories as CategoryWithSections[]) {
+    if (category.id === 6592468755101) {
   items.push({
     key: 'dominican-republic',
     label: 'Info Boca Bouch',
