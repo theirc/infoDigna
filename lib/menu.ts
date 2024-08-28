@@ -51,7 +51,11 @@ export function getFooterItems(
     label: 'EE.UU: ImportaMi',
     href: 'https://www.importami.org/',
   });
-
+  items.push({
+    key: 'Colombia',
+    label: 'InfoPalante Ecuador',
+    href: 'https://www.infopalante.org/',
+  });
   items.push({
     key: 'ven-info',
     label: 'Perú: Veninformado',
