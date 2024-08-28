@@ -53,7 +53,7 @@ export function getFooterItems(
   });
   items.push({
     key: 'Colombia',
-    label: 'InfoPalante Ecuador',
+    label: 'InfoPalante Colombia',
     href: 'https://www.infopalante.org/',
   });
   items.push({
